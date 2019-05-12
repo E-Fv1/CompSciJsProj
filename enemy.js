@@ -28,14 +28,14 @@ loadImage("https://i.imgur.com/ylUDBl6.png")
   }
   this.update = function(){
       if(this.dir == 1){
-      if(this.x > 940){
+      if(this.x > 10000){
       }else{
-        this.x += 10
+        this.x += 2
       }
       }else if(this.dir == 2){
         if(this.x < 10){
       } else {
-        this.x -= 10
+        this.x -= 2
       }
       } else if(this.dir == 3){
         this.y += .1

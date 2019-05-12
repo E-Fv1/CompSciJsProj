@@ -50,11 +50,9 @@
       } else {
         enemy1.dir = 2
       }
-      if(player.y <= enemy1.y + 50){
-        enemy1.dir = 4
-      } else if(player.y >= enemy1.y + 50) {
-        enemy1.dir = 3
-      }
+      if(player.y > enemy1.y && player.y > enemy1.y - 100){enemy1.dir = 3}
+      else if(player.y < enemy1.y && player.y < enemy1.y - 100){enemy1.dir = 4}
+
     }
   }
 
