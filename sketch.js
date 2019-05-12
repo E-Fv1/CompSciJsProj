@@ -23,15 +23,17 @@
   function draw(){
     background('#222222')
     if(!pause){
-      player.update()
+      enemy1.update()
       pshot.update()
+      player.update()
       // enemy1.update()
       sightupdate()
       shootPosUpdate()
+      enemytrack()
     }
     player.show()
-    pshot.show()
     enemy1.show()
+    pshot.show()
     reloadCheck()
   }
   function sighton(){
@@ -39,6 +41,14 @@
     aimer.w = 200
     aimer.h = 200
     player.dir = 0
+  }
+
+  function enemytrack(){
+    if(player.x >= enemy1.x){
+      enemy1.dir = 1
+    } else {
+      enemy1.dir = 2
+    }
   }
 
   function sightoff(){
@@ -95,18 +105,23 @@
   {
     if(!pause && keyCode === UP_ARROW){
       player.updir()
+      pshot.shoot = false
       sightoff()
     } else if (!pause && keyCode === RIGHT_ARROW){
       player.rightdir()
+      pshot.shoot = false
       sightoff()
     } else if (!pause && keyCode === LEFT_ARROW){
       player.leftdir()
+      pshot.shoot = false
       sightoff()
     } else if (!pause && keyCode === DOWN_ARROW){
       player.downdir()
+      pshot.shoot = false
       sightoff()
     } else if (!pause && keyCode === SHIFT){
       player.nomove()
+      pshot.shoot = false
       sighton()
     } else if (key === 'p'){
       pause = !pause

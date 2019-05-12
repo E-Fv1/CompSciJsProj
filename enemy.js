@@ -1,7 +1,7 @@
 
 function Enemy()
 {
-  this.x = 50
+  this.x = 20
   this.y = 150
   this.w = 550
   this.h = 200
@@ -9,6 +9,10 @@ function Enemy()
 loadImage("https://i.imgur.com/ylUDBl6.png")
   this.dir = 0
   this.shoot = false
+
+  this.track = function(){
+
+  }
 
   this.show = function (){
     image(this.img, this.x, this.y, this.w, this.h)
@@ -26,13 +30,17 @@ loadImage("https://i.imgur.com/ylUDBl6.png")
       if(this.dir == 1){
       if(this.x > 940){
       }else{
-        this.x += 5
+        this.x += 0.1
       }
       }else if(this.dir == 2){
         if(this.x < 10){
       } else {
-        this.x = this.x - 5
+        this.x -= 0.1
       }
+      } else if(this.dir == 3){
+        this.y += 15
+      } else if (this.dir == 4) {
+        this.y -= 15
       }
-  }
+    }
 }
