@@ -109,7 +109,7 @@
 
   function hitDetection(){
     if(pshot.shoot == true){
-      if(enemy1.x <= pshot.x && enemy1.x+ 600 >= pshot.x){
+      if(enemy1.x <= pshot.x && enemy1.x+ 600 >= pshot.x && enemy1.y <= pshot.y && enemy1.y + 200 >= pshot.y){
         alert('asf aads')
         pshot.shoot = false
         enemy1.alive = false
@@ -145,6 +145,7 @@
     if(!pause && keyCode === ENTER){
       shoot()
       sightoff()
+      player.dir = 0
     }
     if(!pause && key === 'r'){
       startReload()
