@@ -30,17 +30,17 @@ loadImage("https://i.imgur.com/ylUDBl6.png")
       if(this.dir == 1){
       if(this.x > 940){
       }else{
-        this.x += 0.1
+        this.x += 10
       }
       }else if(this.dir == 2){
         if(this.x < 10){
       } else {
-        this.x -= 0.1
+        this.x -= 10
       }
       } else if(this.dir == 3){
-        this.y += 15
+        this.y += .1
       } else if (this.dir == 4) {
-        this.y -= 15
+        this.y -= .1
       }
     }
 }

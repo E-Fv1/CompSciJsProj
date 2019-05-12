@@ -29,14 +29,14 @@ loadImage("https://media.discordapp.net/attachments/374414128795615232/575900088
   }
   this.update = function(){
 
-    
+
     if(this.dir == 1){
         if(this.y < 10){
           }else{
             this.y -= 5
           }
       }else if(this.dir == 2){
-        if(this.x > 940){
+        if(this.x > 7440){
           }else{
             this.x += 5
           }
@@ -46,7 +46,7 @@ loadImage("https://media.discordapp.net/attachments/374414128795615232/575900088
             this.x = this.x - 5
           }
       }else if(this.dir == 4){
-        if(this.y > 490){
+        if(this.y > 810){
           } else {
             this.y = this.y + 5
           }

@@ -13,7 +13,7 @@
   var pause = false
 
   function setup(){
-    createCanvas(1200, 600)
+    createCanvas(7500, 1000)
     enemy1 = new Enemy()
     player = new Player()
     pshot = new Explosion()
@@ -44,10 +44,17 @@
   }
 
   function enemytrack(){
-    if(player.x >= enemy1.x){
-      enemy1.dir = 1
-    } else {
-      enemy1.dir = 2
+    if(pause == false){
+      if(player.x >= enemy1.x){
+        enemy1.dir = 1
+      } else {
+        enemy1.dir = 2
+      }
+      if(player.y <= enemy1.y + 50){
+        enemy1.dir = 4
+      } else if(player.y >= enemy1.y + 50) {
+        enemy1.dir = 3
+      }
     }
   }
 
