@@ -13,7 +13,7 @@
   var pause = false
 
   function setup(){
-    createCanvas(7500, 1000)
+    createCanvas(2100, 800)
     enemy1 = new Enemy()
     player = new Player()
     pshot = new Explosion()
@@ -30,6 +30,7 @@
       sightupdate()
       shootPosUpdate()
       enemytrack()
+      hitDetection()
     }
     player.show()
     enemy1.show()
@@ -102,6 +103,16 @@
       if(pshot.shoot == true){
         alert('dfs');pshot.shoot = false
       }
+      }
+    }
+  }
+
+  function hitDetection(){
+    if(pshot.shoot == true){
+      if(enemy1.x <= pshot.x && enemy1.x+ 600 >= pshot.x){
+        alert('asf aads')
+        pshot.shoot = false
+        enemy1.alive = false
       }
     }
   }
