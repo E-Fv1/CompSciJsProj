@@ -107,9 +107,16 @@
     }
   }
 
+  function barrage() {
+    for (var i = 0; i < 300; i++) {
+      pshot.x = aimer.x + 30 + i * 0.5
+      pshot.shoot = true
+    }
+  }
+
   function hitDetection(){
     if(pshot.shoot == true){
-      if(enemy1.x <= pshot.x && enemy1.x+ 600 >= pshot.x && enemy1.y <= pshot.y && enemy1.y + 200 >= pshot.y){
+      if(enemy1.alive == true && enemy1.x <= pshot.x && enemy1.x+ 600 >= pshot.x && enemy1.y <= pshot.y && enemy1.y + 200 >= pshot.y){
         alert('Enemy Killed')
         pshot.shoot = false
         enemy1.alive = false
@@ -150,5 +157,7 @@
     if(!pause && key === 'r'){
       startReload()
     }
-
+    if(!pause && key === 'h'){
+      barrage()
+    }
   }
