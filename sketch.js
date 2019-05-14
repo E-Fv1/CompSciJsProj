@@ -110,7 +110,7 @@
   function hitDetection(){
     if(pshot.shoot == true){
       if(enemy1.x <= pshot.x && enemy1.x+ 600 >= pshot.x && enemy1.y <= pshot.y && enemy1.y + 200 >= pshot.y){
-        alert('asf aads')
+        alert('Enemy Killed')
         pshot.shoot = false
         enemy1.alive = false
       }
