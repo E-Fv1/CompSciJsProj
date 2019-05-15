@@ -1,8 +1,8 @@
 
 function Enemy()
 {
-  this.x = 20
-  this.y = 10
+  this.x = 100
+  this.y = 100
   this.w = 550
   this.h = 200
   this.img =
