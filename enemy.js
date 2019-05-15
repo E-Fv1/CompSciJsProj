@@ -10,6 +10,7 @@ loadImage("https://i.imgur.com/ylUDBl6.png")
   this.dir = 0
   this.shoot = false
   this.alive = true
+  this.firearea = 100
 
   this.track = function(){
 
