@@ -1,3 +1,4 @@
+// make variables and set a few to default values
 var player;
 var pshot;
 var aimer;
@@ -13,11 +14,12 @@ var reloaded = false;
 var pause = false;
 
 var level = 1;
-
+// functions for level change buttons
 function lv1reset() {
   enemy1.alive = true;
   enemy1.x = 100;
   enemy1.y = 100;
+  player.alive = true;
   player.x = 1100;
   player.y = 600;
   player.dir = 0;
@@ -41,6 +43,7 @@ function lv2reset() {
   // enemy5.x = 900
   // enemy5.y = 500
   player.x = 1100;
+  player.alive = true;
   player.y = 600;
   player.dir = 0;
   level = 2;
@@ -56,12 +59,13 @@ function lv3reset() {
   enemy1.y = 100;
   enemy2.x = 300;
   enemy2.y = 300;
-  enemy3.x = 500;
-  enemy3.y = 600;
+  enemy3.x = 1500;
+  enemy3.y = 200;
   // enemy4.x = 700
   // enemy4.y = 400
   // enemy5.x = 900
   // enemy5.y = 500
+  player.alive = true;
   player.x = 1100;
   player.y = 600;
   player.dir = 0;
@@ -84,6 +88,7 @@ function lv4reset() {
   enemy4.y = 600;
   // enemy5.x = 900
   // enemy5.y = 500
+  player.alive = true;
   player.x = 1100;
   player.y = 600;
   player.dir = 0;
@@ -107,11 +112,12 @@ function lv5reset() {
   enemy5.x = 900;
   enemy5.y = 500;
   player.x = 1500;
+  player.alive = true;
   player.y = 600;
   player.dir = 0;
   level = 5;
 }
-
+// checks if all enemies are dead for each level
 function winCheck() {
   if (level == 1 && enemy1.alive == false) {
     alert("You have finished level 1!");
@@ -152,7 +158,7 @@ function winCheck() {
     level = 0;
   }
 }
-
+// creates the canvas and objects
 function setup() {
   createCanvas(2100, 800);
   enemy1 = new Enemy();
@@ -173,7 +179,7 @@ function setup() {
   pshot = new Explosion();
   aimer = new Reticle();
 }
-
+// main loop that execs functions
 function draw() {
   background("#222222");
   if (!pause) {
@@ -201,15 +207,9 @@ function draw() {
   ETPHitDetection();
   enemyFireDevUpdate();
 }
-function sighton() {
-  aimer.state = true;
-  aimer.w = 200;
-  aimer.h = 200;
-  player.dir = 0;
-}
-
+// detects where the player is relative to the player
 function enemytrack() {
-  if (pause == false) {
+  if (pause == false && player.alive == true) {
     if (player.x >= enemy1.x) {
       enemy1.dir = 1;
     } else {
@@ -262,174 +262,289 @@ function enemytrack() {
     }
   }
 }
+// turn on off sight
+function sighton() {
+  aimer.state = true;
+  aimer.w = 200;
+  aimer.h = 200;
+  player.dir = 0;
+}
 
 function sightoff() {
   aimer.state = false;
   aimer.w = 1;
   aimer.h = 1;
 }
-
+// set range for enemy guns
 function enemyFireDevUpdate() {
-  enemy1.firearea = 100 + Math.random() * 5;
+  enemy1.firearea = enemy1.x + 800 + Math.random() * 5;
+  enemy2.firearea = enemy2.x + 800 + Math.random() * 5;
+  enemy3.firearea = enemy3.x + 800 + Math.random() * 5;
+  enemy4.firearea = enemy4.x + 800 + Math.random() * 5;
+  enemy5.firearea = enemy5.x + 800 + Math.random() * 5;
 }
-
+// check if player is in enemy range
 function ETPHitDetection() {
   if (
     player.alive == true &&
-    player.x <= enemy1.firearea &&
-    player.x - 250 >= enemy1.firearea &&
-    player.y <= enemy1.y + 10 &&
-    player.y + 110 >= enemy1.y
+    enemy1.alive == true &&
+    enemy1.x + 300 >= player.x &&
+    enemy1.x < player.x + 300 &&
+    enemy1.y + 100 >= player.y &&
+    enemy2.y - 100 <= player.y
   ) {
+    alert("You have died");
+    player.alive = false;
   }
-
-  function sightupdate() {
-    aimer.x = player.x - 600;
-    aimer.y = player.y - 60;
-    image(aimer.img, aimer.x, aimer.y, aimer.w, aimer.h);
+  if (
+    player.alive == true &&
+    enemy2.alive == true &&
+    enemy2.x + 300 >= player.x &&
+    enemy2.x < player.x + 300 &&
+    enemy2.y + 100 >= player.y &&
+    enemy2.y - 100 <= player.y
+  ) {
+    alert("You have died");
+    player.alive = false;
   }
-
-  function shootPosUpdate() {
-    pshot.x = aimer.x + 30;
-    pshot.y = aimer.y + 25;
+  if (
+    player.alive == true &&
+    enemy3.alive == true &&
+    enemy3.x + 300 >= player.x &&
+    enemy3.x < player.x + 300 &&
+    enemy3.y + 100 >= player.y &&
+    enemy2.y - 100 <= player.y
+  ) {
+    alert("You have died");
+    player.alive = false;
   }
-
-  function startReload() {
-    reloadState++;
+  if (
+    player.alive == true &&
+    enemy4.alive == true &&
+    enemy4.x + 300 >= player.x &&
+    enemy4.x < player.x + 300 &&
+    enemy4.y + 100 >= player.y &&
+    enemy2.y - 100 <= player.y
+  ) {
+    alert("You have died");
+    player.alive = false;
   }
-
-  function reloadCheck() {
-    if (reloadState >= 15) {
-      reloadState = 0;
-      reloaded = true;
-    }
-    document.getElementById("reload").innerHTML =
-      reloaded + "..." + reloadState;
+  if (
+    player.alive == true &&
+    enemy5.alive == true &&
+    enemy5.x + 300 >= player.x &&
+    enemy5.x < player.x + 300 &&
+    enemy5.y + 100 >= player.y &&
+    enemy2.y - 100 <= player.y
+  ) {
+    alert("You have died");
+    player.alive = false;
   }
+  if (
+    player.alive == true &&
+    player.x <= enemy1.firearea &&
+    player.x + 250 >= enemy1.firearea &&
+    player.y <= enemy1.y + 30 &&
+    player.y + 150 >= enemy1.y &&
+    enemy1.alive == true
+  ) {
+    alert("You have died");
+    player.alive = false;
+  }
+  if (
+    player.alive == true &&
+    player.x <= enemy2.firearea &&
+    player.x + 250 >= enemy2.firearea &&
+    player.y <= enemy2.y + 30 &&
+    player.y + 150 >= enemy2.y &&
+    enemy2.alive == true
+  ) {
+    alert("You have died");
+    player.alive = false;
+  }
+  if (
+    player.alive == true &&
+    player.x <= enemy3.firearea &&
+    player.x + 250 >= enemy3.firearea &&
+    player.y <= enemy3.y + 30 &&
+    player.y + 150 >= enemy3.y &&
+    enemy3.alive == true
+  ) {
+    alert("You have died");
+    player.alive = false;
+  }
+  if (
+    player.alive == true &&
+    player.x <= enemy4.firearea &&
+    player.x + 250 >= enemy4.firearea &&
+    player.y <= enemy4.y + 30 &&
+    player.y + 150 >= enemy4.y &&
+    enemy4.alive == true
+  ) {
+    alert("You have died");
+    player.alive = false;
+  }
+  if (
+    player.alive == true &&
+    player.x <= enemy5.firearea &&
+    player.x + 250 >= enemy5.firearea &&
+    player.y <= enemy5.y + 30 &&
+    player.y + 150 >= enemy5.y &&
+    enemy5.alive == true
+  ) {
+    alert("You have died");
+    player.alive = false;
+  }
+}
+// update where player is going to shoot
+function sightupdate() {
+  aimer.x = player.x - 600;
+  aimer.y = player.y - 60;
+  image(aimer.img, aimer.x, aimer.y, aimer.w, aimer.h);
+}
 
-  function shoot() {
+function shootPosUpdate() {
+  pshot.x = aimer.x + 30;
+  pshot.y = aimer.y + 25;
+}
+// start the reload and check if the reload is finished
+function startReload() {
+  reloadState++;
+}
+
+function reloadCheck() {
+  if (reloadState >= 15) {
+    reloadState = 0;
+    reloaded = true;
+  }
+  document.getElementById("reload").innerHTML =
+    reloaded + "  . . .  " + reloadState;
+}
+// fire the gun
+function shoot() {
+  sightoff();
+  player.dir = 0;
+  if (pshot.shoot == true) {
+    pshot.shoot = false;
+  }
+  if (reloaded == true) {
     if (pshot.shoot == true) {
       pshot.shoot = false;
+      reloaded = false;
     }
-    if (reloaded == true) {
-      if (pshot.shoot == true) {
-        pshot.shoot = false;
-        reloaded = false;
-      }
-      if (pshot.shoot == false) {
-        pshot.shoot = true;
-        reloaded = false;
-        // reloadState = 0
-      } else {
-        if (pshot.shoot == true) {
-          alert("dfs");
-          pshot.shoot = false;
-        }
-      }
-    }
-  }
-
-  function barrage() {
-    for (var i = 0; i < 300; i++) {
-      pshot.x = aimer.x + 30 + i * 0.5;
+    if (pshot.shoot == false) {
       pshot.shoot = true;
-    }
-  }
-
-  function hitDetection() {
-    if (pshot.shoot == true) {
-      if (
-        enemy1.alive == true &&
-        enemy1.x <= pshot.x &&
-        enemy1.x + 600 >= pshot.x &&
-        enemy1.y <= pshot.y &&
-        enemy1.y + 150 >= pshot.y
-      ) {
-        alert("Enemy Killed");
+      reloaded = false;
+      // reloadState = 0
+    } else {
+      if (pshot.shoot == true) {
+        alert("dfs");
         pshot.shoot = false;
-        enemy1.alive = false;
-      }
-      if (
-        enemy2.alive == true &&
-        enemy2.x <= pshot.x &&
-        enemy2.x + 600 >= pshot.x &&
-        enemy2.y <= pshot.y &&
-        enemy2.y + 250 >= pshot.y
-      ) {
-        alert("Enemy Killed");
-        pshot.shoot = false;
-        enemy2.alive = false;
-      }
-      if (
-        enemy3.alive == true &&
-        enemy3.x <= pshot.x &&
-        enemy3.x + 600 >= pshot.x &&
-        enemy3.y <= pshot.y &&
-        enemy3.y + 350 >= pshot.y
-      ) {
-        alert("Enemy Killed");
-        pshot.shoot = false;
-        enemy3.alive = false;
-      }
-      if (
-        enemy4.alive == true &&
-        enemy4.x <= pshot.x &&
-        enemy4.x + 600 >= pshot.x &&
-        enemy4.y <= pshot.y &&
-        enemy4.y + 450 >= pshot.y
-      ) {
-        alert("Enemy Killed");
-        pshot.shoot = false;
-        enemy4.alive = false;
-      }
-      if (
-        enemy5.alive == true &&
-        enemy5.x <= pshot.x &&
-        enemy5.x + 600 >= pshot.x &&
-        enemy5.y <= pshot.y &&
-        enemy5.y + 550 >= pshot.y
-      ) {
-        alert("Enemy Killed");
-        pshot.shoot = false;
-        enemy5.alive = false;
       }
     }
   }
-
-  function keyPressed() {
-    if (!pause && keyCode === UP_ARROW) {
-      player.updir();
+}
+// cheat command
+function barrage() {
+  for (var i = 0; i < 300; i++) {
+    pshot.x = aimer.x + 30 + i * 0.5;
+    pshot.shoot = true;
+  }
+}
+// check if player's shot hit
+function hitDetection() {
+  if (pshot.shoot == true) {
+    if (
+      enemy1.alive == true &&
+      enemy1.x <= pshot.x &&
+      enemy1.x + 600 >= pshot.x &&
+      enemy1.y <= pshot.y &&
+      enemy1.y + 150 >= pshot.y
+    ) {
+      alert("Enemy Killed");
       pshot.shoot = false;
-      sightoff();
-    } else if (!pause && keyCode === RIGHT_ARROW) {
-      player.rightdir();
-      pshot.shoot = false;
-      sightoff();
-    } else if (!pause && keyCode === LEFT_ARROW) {
-      player.leftdir();
-      pshot.shoot = false;
-      sightoff();
-    } else if (!pause && keyCode === DOWN_ARROW) {
-      player.downdir();
-      pshot.shoot = false;
-      sightoff();
-    } else if (!pause && keyCode === SHIFT) {
-      player.nomove();
-      pshot.shoot = false;
-      sighton();
-    } else if (key === "p") {
-      pause = !pause;
+      enemy1.alive = false;
     }
-    if (!pause && keyCode === ENTER) {
-      shoot();
-      sightoff();
-      player.dir = 0;
+    if (
+      enemy2.alive == true &&
+      enemy2.x <= pshot.x &&
+      enemy2.x + 600 >= pshot.x &&
+      enemy2.y <= pshot.y &&
+      enemy2.y + 250 >= pshot.y
+    ) {
+      alert("Enemy Killed");
+      pshot.shoot = false;
+      enemy2.alive = false;
     }
-    if (!pause && key === "r") {
-      startReload();
+    if (
+      enemy3.alive == true &&
+      enemy3.x <= pshot.x &&
+      enemy3.x + 600 >= pshot.x &&
+      enemy3.y <= pshot.y &&
+      enemy3.y + 350 >= pshot.y
+    ) {
+      alert("Enemy Killed");
+      pshot.shoot = false;
+      enemy3.alive = false;
     }
-    if (!pause && key === "h") {
-      barrage();
+    if (
+      enemy4.alive == true &&
+      enemy4.x <= pshot.x &&
+      enemy4.x + 600 >= pshot.x &&
+      enemy4.y <= pshot.y &&
+      enemy4.y + 450 >= pshot.y
+    ) {
+      alert("Enemy Killed");
+      pshot.shoot = false;
+      enemy4.alive = false;
     }
+    if (
+      enemy5.alive == true &&
+      enemy5.x <= pshot.x &&
+      enemy5.x + 600 >= pshot.x &&
+      enemy5.y <= pshot.y &&
+      enemy5.y + 550 >= pshot.y
+    ) {
+      alert("Enemy Killed");
+      pshot.shoot = false;
+      enemy5.alive = false;
+    }
+  }
+}
+// detect key presses
+function keyPressed() {
+  if (!pause && keyCode === UP_ARROW) {
+    player.updir();
+    pshot.shoot = false;
+    sightoff();
+  } else if (!pause && keyCode === RIGHT_ARROW) {
+    player.rightdir();
+    pshot.shoot = false;
+    sightoff();
+  } else if (!pause && keyCode === LEFT_ARROW) {
+    player.leftdir();
+    pshot.shoot = false;
+    sightoff();
+  } else if (!pause && keyCode === DOWN_ARROW) {
+    player.downdir();
+    pshot.shoot = false;
+    sightoff();
+  } else if (!pause && keyCode === SHIFT) {
+    player.nomove();
+    pshot.shoot = false;
+    sighton();
+  } else if (key === "p") {
+    pause = !pause;
+  }
+  if (!pause && keyCode === ENTER) {
+    shoot();
+    sightoff();
+    player.dir = 0;
+  }
+  if (!pause && key === "r") {
+    startReload();
+  }
+  if (!pause && key === "h") {
+    barrage();
   }
 }

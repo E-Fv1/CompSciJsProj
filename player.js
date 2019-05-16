@@ -15,24 +15,29 @@ loadImage("https://media.discordapp.net/attachments/374414128795615232/575900088
     image(this.img, this.x, this.y, this.w, this.h)
     }
   }
+  // set direction of player
   this.updir = function (){
     this.dir = 1
+    this.shoot = false
   }
   this.rightdir = function(){
     this.dir = 2
+    this.shoot = false
   }
   this.leftdir = function (){
     this.dir = 3
+    this.shoot = false
   }
   this.downdir = function(){
     this.dir = 4
+    this.shoot = false
   }
   this.nomove = function(){
     this.dir = 0
+    this.shoot = false
   }
+  // move player
   this.update = function(){
-
-
     if(this.dir == 1){
         if(this.y < 10){
           }else{

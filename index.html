@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <link rel="stylesheet" href="style.css">
-    <meta charset="utf-8">
-    <title>JS Project</title>
-  </head>
-  <body>
-    ._.<br>
+
+<head>
+  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <title>JS Project</title>
+</head>
+
+<body>
+  <!-- ._.<br>
     .-.<br>
     shotw
     <input type="text" id="shotw"><br>
@@ -15,20 +17,46 @@
     shotx
     <input type="text" id="shotx"><br>
     shoty
-    <input type="text" id="shoty"><br>
-    <button type="button" onclick="shoot()">shoot</button><hr>
-    <button type="button" onclick="lv1reset()">Level One</button><hr>
-    <button type="button" onclick="lv2reset()">Level Two</button><hr>
-    <button type="button" onclick="lv3reset()">Level Three</button><hr>
-    <button type="button" onclick="lv4reset()">Level Four</button><hr>
-    <button type="button" onclick="lv5reset()">Level Five</button><hr>
-    <p>reloadstate<p/><p id="reload"></p>
-    <p>explosionstate</p><p id="active"></p>
+    <input type="text" id="shoty"><br> -->
+  <!--Controls help-->
+  <a href="helpme.html">HELP!!!!?!?!</a><br>
+  <!--Level changes-->
+  <button type="button" onclick="lv1reset()">Level One</button>
+  <hr>
+  <button type="button" onclick="lv2reset()">Level Two</button>
+  <hr>
+  <button type="button" onclick="lv3reset()">Level Three</button>
+  <hr>
+  <button type="button" onclick="lv4reset()">Level Four</button>
+  <hr>
+  <button type="button" onclick="lv5reset()">Level Five</button>
+  <!-- GUI to help player see what is happening -->
+  <p>Are you reloaded?</p>
+  <p>State of your reload from 0-15
+  <p/>
+  <p id="reload"></p>
+  <p>Are you shooting right now?</p>
+  <p id="active"></p>
+  <!-- Control panel buttons -->
+    <button type="button" class="control" onclick="sighton()">Gunsight On</button>
+    <button type="button" class="control" onclick="sightoff()">Gunsight Off</button>
+    <hr>
+    <button type="button" class="control" onclick="player.leftdir()">Tank Forwards</button>
+    <button type="button" class="control" onclick="player.rightdir()">Tank Backwards</button>
+    <hr>
+    <button type="button" class="control" onclick="player.updir()">Divert tank power to strafing right</button>
+    <button type="button" class="control" onclick="player.downdir()">Divert tank power to strafing left</button>
+    <hr>
+    <button type="button" class="control" onclick="shoot()">FIRE</button>
+    <button type="button" class="control" onclick="startReload()">Reload</button>
+    <br>
+    <!-- js code being called -->
     <script src="p5.js"></script>
     <script type="text/javascript" src="sketch.js"></script>
     <script type="text/javascript" src="player.js"></script>
     <script type="text/javascript" src="explosion.js"></script>
     <script type="text/javascript" src="reticle.js"></script>
     <script type="text/javascript" src="enemy.js"></script>
-  </body>
+</body>
+
 </html>
